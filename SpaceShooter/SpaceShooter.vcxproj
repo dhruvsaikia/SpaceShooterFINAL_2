@@ -24,6 +24,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy2.h" />
     <ClInclude Include="Fireball.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Meteor.h" />
     <ClInclude Include="Meteor2.h" />
@@ -37,6 +38,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy2.cpp" />
     <ClCompile Include="Fireball.cpp" />
+    <ClCompile Include="json.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Meteor.cpp" />
     <ClCompile Include="Meteor2.cpp" />
