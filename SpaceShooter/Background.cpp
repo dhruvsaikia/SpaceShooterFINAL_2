@@ -169,7 +169,7 @@ void	Background::makeEnemy2(t_settings& settings) {
 		randNum = rand() % 2;
 		if (randNum) {
 			int pos_x = (rand() % (WINDOW_WIDTH / ENEMY2_WIDTH) + 1) * ENEMY2_WIDTH - ENEMY2_WIDTH;
-			_enemies2[i] = new Enemy(pos_x);
+			_enemies2[i] = new Enemy2(pos_x);
 			_enemies2[i]->load(ENEMY2_IMG, settings);
 			quantity--;
 		}
@@ -212,7 +212,7 @@ void	Background::displayEnemy(t_settings& settings, bool itsTime) {
 				_enemies[i] = NULL;
 				continue;
 			}
-			if (itsTime) _enemies[i]->moveDown();
+			if (itsTime) _enemies[i]->moveDown(deltaTime);
 			_enemies[i]->render(settings);
 		}
 	}
@@ -226,7 +226,7 @@ void	Background::displayEnemy2(t_settings& settings, bool itsTime) {
 				_enemies2[i] = NULL;
 				continue;
 			}
-			if (itsTime) _enemies2[i]->moveDown();
+			if (itsTime) _enemies2[i]->moveDown(deltaTime);
 			_enemies2[i]->render(settings);
 		}
 	}

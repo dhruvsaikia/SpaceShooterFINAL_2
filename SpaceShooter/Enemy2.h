@@ -8,6 +8,6 @@ public:
     Enemy2(int x);
     ~Enemy2(void);
 
-    virtual void moveDown(void) override; 
+    virtual void moveDown(float) override; 
 };
 

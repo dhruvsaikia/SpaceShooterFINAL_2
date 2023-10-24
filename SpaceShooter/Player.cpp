@@ -116,6 +116,39 @@ bool		Player::containes(Enemy* enemy) {
 	return false;
 }
 
+bool		Player::containes(Enemy2* enemy2) {
+	shiftColliders();
+	int topPlayer_0 = _colliders[0].y;
+	int bottomPlayer_0 = _colliders[0].y + _colliders[0].h;
+	int leftPlayer_0 = _colliders[0].x;
+	int rightPlayer_0 = _colliders[0].x + _colliders[0].w;
+
+	int topPlayer_1 = _colliders[1].y;
+	int bottomPlayer_1 = _colliders[1].y + _colliders[1].h;
+	int leftPlayer_1 = _colliders[1].x;
+	int rightPlayer_1 = _colliders[1].x + _colliders[1].w;
+
+	int topEnemy = enemy2->getY();
+	int bottomEnemy = enemy2->getY() + ENEMY2_HEIGHT;
+	int leftEnemy = enemy2->getX();
+	int rightEnemy = enemy2->getX() + ENEMY2_WIDTH;
+
+	if (((bottomPlayer_0 <= topEnemy) ||
+		(topPlayer_0 >= bottomEnemy) ||
+		(rightPlayer_0 <= leftEnemy) ||
+		(leftPlayer_0 >= rightEnemy)) == false)
+		return true;
+
+	if (((bottomPlayer_1 <= topEnemy) ||
+		(topPlayer_1 >= bottomEnemy) ||
+		(rightPlayer_1 <= leftEnemy) ||
+		(leftPlayer_1 >= rightEnemy)) == false)
+		return true;
+
+	return false;
+}
+
+
 bool		Player::containes(Meteor* meteor) {
 	shiftColliders();
 	int topPlayer_0 = _colliders[0].y;
@@ -152,6 +185,17 @@ bool		Player::kill(int index, Enemy* enemy) {
 	if (index >= MAX_BULLETS || !_bullets[index])
 		return false;
 	if (_bullets[index]->contains(enemy)) {
+		delete _bullets[index];
+		_bullets[index] = NULL;
+		return true;
+	}
+	return false;
+}
+
+bool		Player::kill(int index, Enemy2* enemy2) {
+	if (index >= MAX_BULLETS || !_bullets[index])
+		return false;
+	if (_bullets[index]->contains(enemy2)) {
 		delete _bullets[index];
 		_bullets[index] = NULL;
 		return true;

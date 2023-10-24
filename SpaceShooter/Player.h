@@ -3,6 +3,7 @@
 
 #include "AUnit.h"
 #include "Enemy.h"
+#include "Enemy2.h"
 #include "Meteor.h"
 
 class Fireball;
@@ -34,9 +35,11 @@ public:
 	void			shiftColliders(void);
 
 	bool			containes(Enemy* enemy);
+	bool			containes(Enemy2* enemy2);
 	bool			containes(Meteor* meteor);
 
 	bool			kill(int index, Enemy* enemy);
+	bool			kill(int index, Enemy2* enemy2);
 	bool			kill(int index, Meteor* meteor);
 
 	bool			getKilled(int hit_points);

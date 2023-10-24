@@ -10,7 +10,7 @@ public:
 	Enemy(int x);
 	~Enemy(void);
 
-	virtual void moveDown(void);
+	virtual void moveDown(float);
 };
 
 #endif
