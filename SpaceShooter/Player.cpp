@@ -47,6 +47,7 @@ void		Player::moveDown(void) {
 	setY(getY() + 1);
 }
 
+
 void		Player::shoot(t_settings& settings) {
 	if (SDL_GetTicks() - _lastShot < 300)
 		return;

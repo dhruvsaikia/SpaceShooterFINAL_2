@@ -11,7 +11,7 @@ class Fireball;
 class Player : public AUnit {
 
 private:
-	Fireball* _bullets[MAX_BULLETS];
+	Fireball*				_bullets[MAX_BULLETS];
 	static int				_qBullets;
 	std::vector<SDL_Rect>	_colliders;
 	static int				_lives;

@@ -20,7 +20,7 @@ public:
 	int				getHeight(void);
 	int				getX(void);
 	int				getY(void);
-	SDL_Texture* getTexture(void);
+	SDL_Texture*	getTexture(void);
 
 	void			setWidth(int width);
 	void			setHeight(int height);
