@@ -52,9 +52,8 @@
 #define FIREBALL_IMG ("Assets/laserGreen.png")
 #define GAME_OVER ("Assets/game_over.png")
 
-#define FONT_TTF ("ttf/banksb20.ttf")
+#define FONT_TTF ("ttf/courbd.ttf")
 
-#define MUSIC ("audio/moons_001.wav")
 class AUnit;
 class Player;
 

@@ -10,6 +10,6 @@ Enemy2::Enemy2(int x) {
 Enemy2::~Enemy2(void) {
 }
 
-void	Enemy2::moveDown(float) {
-	setY(getY() + 4);
+void	Enemy2::moveDown(void) {
+	setY(getY() + 5);
 }

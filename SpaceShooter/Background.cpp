@@ -212,7 +212,7 @@ void	Background::displayEnemy(t_settings& settings, bool itsTime) {
 				_enemies[i] = NULL;
 				continue;
 			}
-			if (itsTime) _enemies[i]->moveDown(deltaTime);
+			if (itsTime) _enemies[i]->moveDown();
 			_enemies[i]->render(settings);
 		}
 	}
@@ -226,7 +226,7 @@ void	Background::displayEnemy2(t_settings& settings, bool itsTime) {
 				_enemies2[i] = NULL;
 				continue;
 			}
-			if (itsTime) _enemies2[i]->moveDown(deltaTime);
+			if (itsTime) _enemies2[i]->moveDown();
 			_enemies2[i]->render(settings);
 		}
 	}

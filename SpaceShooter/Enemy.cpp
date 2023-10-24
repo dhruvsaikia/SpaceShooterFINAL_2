@@ -10,7 +10,6 @@ Enemy::Enemy(int x) {
 Enemy::~Enemy(void) {
 }
 
-void Enemy::moveDown(float deltaTime) {
-	int movementSpeed = 4;  
-	setY(getY() + (movementSpeed * deltaTime));
+void	Enemy::moveDown(void) {
+	setY(getY() + 5);
 }

@@ -71,13 +71,8 @@ int		main(int ac, char* av[]) {
 		SDL_Event event;
 		unsigned long ticks = 0;
 		const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-		Uint32 currentFrameTime, lastFrameTime = 0;
-		float deltaTime = 0.0f;
 
 		while (!quit) {
-			currentFrameTime = SDL_GetTicks();
-			deltaTime = (currentFrameTime - lastFrameTime) / 1000.0f; 
-			lastFrameTime = currentFrameTime;
 			while (SDL_PollEvent(&event) != 0) {
 				if (event.type == SDL_QUIT)
 					quit = true;
@@ -132,7 +127,7 @@ int		main(int ac, char* av[]) {
 
 			background.displayStar(settings);
 			background.displayMeteor(settings, (ticks % 2 == 0));
-			background.displayEnemy(settings, (ticks % (ENEMY_HEIGHT), deltaTime);
+			background.displayEnemy(settings, (ticks % (ENEMY_HEIGHT / 2) == 0));
 			background.displayEnemy2(settings, (ticks % (ENEMY2_HEIGHT / 2) == 0));
 
 			player.render(settings);
