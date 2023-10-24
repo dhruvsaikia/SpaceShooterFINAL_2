@@ -17,6 +17,7 @@
 #define ENEMY_MAX_QUANTITY 100
 #define ENEMY2_MAX_QUANTITY 100
 #define METEOR_MAX_QUANTITY 20
+#define METEOR2_MAX_QUANTITY 20
 #define STAR_MAX_QUANTITY 50
 #define MAX_BULLETS 100
 
@@ -28,26 +29,32 @@
 #define PLAYER_HEIGHT 48
 #define METEOR_WIDTH 64
 #define METEOR_HEIGHT 64
+#define METEOR2_WIDTH 22
+#define METEOR2_HEIGHT 21
 #define STAR_WIDTH 23
 #define STAR_HEIGHT 21
 #define FIREBALL_WIDTH 5
 #define FIREBALL_HEIGHT 17
 
 #define METEOR_HIT 20
+#define METEOR2_HIT 10
 #define ENEMY_HIT 30
 #define ENEMY2_HIT 50
 
 #define METEOR_POINTS 35
+#define METEOR2_POINTS 15
 #define ENEMY_POINTS 75
 #define ENEMY2_POINTS 100
 
 #define PLAYER_START_X ((WINDOW_WIDTH / 2) - (PLAYER_WIDTH / 2))
 #define PLAYER_START_Y (WINDOW_HEIGHT - PLAYER_HEIGHT - 4)
 
+#define BACKGROUND_IMG ("Assets/backgroundColor")
 #define ENEMY_IMG ("Assets/enemyShip.png")
 #define ENEMY2_IMG ("Assets/enemyUFO.png")
 #define PLAYER_IMG ("Assets/player.png")
 #define METEOR_IMG ("Assets/meteorBig.png")
+#define METEOR2_IMG ("Assets/meteorSmall.png")
 #define STAR_IMG ("Assets/starBig.png")
 #define FIREBALL_IMG ("Assets/laserGreen.png")
 #define GAME_OVER ("Assets/game_over.png")

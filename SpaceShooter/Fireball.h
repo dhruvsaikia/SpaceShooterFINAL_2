@@ -7,6 +7,7 @@
 
 class Enemy;
 class Meteor;
+class Meteor2;
 class Enemy2;
 
 class Fireball : public AUnit {
@@ -19,6 +20,7 @@ public:
 	bool			contains(Enemy* enemy);
 	bool			contains(Enemy2* enemy2);
 	bool			contains(Meteor* meteor);
+	bool			contains(Meteor2* meteor2);
 
 };
 

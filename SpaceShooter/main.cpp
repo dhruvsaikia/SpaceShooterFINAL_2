@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Background.h"
 
+Background background;
 bool	init(t_settings& settings) {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
 		std::cout << SDL_GetError() << std::endl;
@@ -35,6 +36,9 @@ bool	init(t_settings& settings) {
 	if (TTF_Init() == -1) {
 		std::cout << TTF_GetError() << std::endl;
 		return false;
+	}
+	if (!background.loadBackground("Assets/backgroundColor.png", settings)) {
+		std::cout << "Failed to load background image." << std::endl;
 	}
 	return true;
 }
@@ -103,6 +107,9 @@ int		main(int ac, char* av[]) {
 			if (ticks % (METEOR_HEIGHT * 20) == 0)
 				background.makeMeteor(settings);
 
+			if (ticks % (METEOR2_HEIGHT * 20) == 0)
+				background.makeMeteor2(settings);
+
 			if (ticks % (ENEMY_HEIGHT * 24) == 0)
 				background.makeEnemy(settings);
 
@@ -112,8 +119,9 @@ int		main(int ac, char* av[]) {
 			background.killEnemy(player);
 			background.killEnemy2(player);
 			background.killMeteor(player);
+			background.killMeteor2(player);
 
-			if (background.hitEnemy(player) || background.hitEnemy2(player) || background.hitMeteor(player)) {
+			if (background.hitEnemy(player) || background.hitEnemy2(player) || background.hitMeteor(player) || background.hitMeteor2(player)) {
 				SDL_SetRenderDrawColor(settings.renderer, 0x61, 0x23, 0x7A, 0xFF);
 				SDL_RenderClear(settings.renderer);
 				background.loadGameOver(GAME_OVER, settings);
@@ -125,8 +133,10 @@ int		main(int ac, char* av[]) {
 			SDL_SetRenderDrawColor(settings.renderer, 0x61, 0x23, 0x7A, 0xFF);
 			SDL_RenderClear(settings.renderer);
 
+			background.render(settings);
 			background.displayStar(settings);
 			background.displayMeteor(settings, (ticks % 2 == 0));
+			background.displayMeteor2(settings, (ticks % 2 == 0));
 			background.displayEnemy(settings, (ticks % (ENEMY_HEIGHT / 2) == 0));
 			background.displayEnemy2(settings, (ticks % (ENEMY2_HEIGHT / 2) == 0));
 

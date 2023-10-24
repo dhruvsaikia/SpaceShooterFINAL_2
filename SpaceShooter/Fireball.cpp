@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "Enemy2.h"
 #include "Meteor.h"
+#include "Meteor2.h"
 
 Fireball::Fireball(Player* player) {
 	setWidth(FIREBALL_WIDTH);
@@ -67,6 +68,26 @@ bool	Fireball::contains(Meteor* meteor) {
 	int bottomMeteor = meteor->getY() + METEOR_HEIGHT;
 	int leftMeteor = meteor->getX();
 	int rightMeteor = meteor->getX() + METEOR_WIDTH;
+
+	if (((bottomBullet <= topMeteor) ||
+		(topBullet >= bottomMeteor) ||
+		(rightBullet <= leftMeteor) ||
+		(leftBullet >= rightMeteor)) == false)
+		return true;
+
+	return false;
+}
+
+bool	Fireball::contains(Meteor2* meteor2) {
+	int topBullet = getY();
+	int bottomBullet = getY() + FIREBALL_HEIGHT;
+	int leftBullet = getX();
+	int rightBullet = getX() + FIREBALL_WIDTH;
+
+	int topMeteor = meteor2->getY();
+	int bottomMeteor = meteor2->getY() + METEOR2_HEIGHT;
+	int leftMeteor = meteor2->getX();
+	int rightMeteor = meteor2->getX() + METEOR2_WIDTH;
 
 	if (((bottomBullet <= topMeteor) ||
 		(topBullet >= bottomMeteor) ||

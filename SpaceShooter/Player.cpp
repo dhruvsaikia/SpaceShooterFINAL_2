@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Fireball.h"
 
+
 int		Player::_qBullets = 0;
 int		Player::_lives = 3;
 int		Player::_hitPoints = 100;
@@ -182,6 +183,38 @@ bool		Player::containes(Meteor* meteor) {
 	return false;
 }
 
+bool		Player::containes(Meteor2* meteor2) {
+	shiftColliders();
+	int topPlayer_0 = _colliders[0].y;
+	int bottomPlayer_0 = _colliders[0].y + _colliders[0].h;
+	int leftPlayer_0 = _colliders[0].x;
+	int rightPlayer_0 = _colliders[0].x + _colliders[0].w;
+
+	int topPlayer_1 = _colliders[1].y;
+	int bottomPlayer_1 = _colliders[1].y + _colliders[1].h;
+	int leftPlayer_1 = _colliders[1].x;
+	int rightPlayer_1 = _colliders[1].x + _colliders[1].w;
+
+	int topMeteor = meteor2->getY();
+	int bottomMeteor = meteor2->getY() + METEOR2_HEIGHT;
+	int leftMeteor = meteor2->getX();
+	int rightMeteor = meteor2->getX() + METEOR2_WIDTH;
+
+	if (((bottomPlayer_0 <= topMeteor) ||
+		(topPlayer_0 >= bottomMeteor) ||
+		(rightPlayer_0 <= leftMeteor) ||
+		(leftPlayer_0 >= rightMeteor)) == false)
+		return true;
+
+	if (((bottomPlayer_1 <= topMeteor) ||
+		(topPlayer_1 >= bottomMeteor) ||
+		(rightPlayer_1 <= leftMeteor) ||
+		(leftPlayer_1 >= rightMeteor)) == false)
+		return true;
+
+	return false;
+}
+
 bool		Player::kill(int index, Enemy* enemy) {
 	if (index >= MAX_BULLETS || !_bullets[index])
 		return false;
@@ -208,6 +241,17 @@ bool		Player::kill(int index, Meteor* meteor) {
 	if (index >= MAX_BULLETS || !_bullets[index])
 		return false;
 	if (_bullets[index]->contains(meteor)) {
+		delete _bullets[index];
+		_bullets[index] = NULL;
+		return true;
+	}
+	return false;
+}
+
+bool		Player::kill(int index, Meteor2* meteor2) {
+	if (index >= MAX_BULLETS || !_bullets[index])
+		return false;
+	if (_bullets[index]->contains(meteor2)) {
 		delete _bullets[index];
 		_bullets[index] = NULL;
 		return true;

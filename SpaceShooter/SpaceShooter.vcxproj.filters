@@ -45,6 +45,9 @@
     <ClInclude Include="Enemy2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Meteor2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Enemy2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Meteor2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

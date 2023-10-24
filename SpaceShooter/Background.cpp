@@ -1,12 +1,15 @@
 #include "Background.h"
 
 Background::Background(void) {
+	bgTexture = nullptr;
 	for (int i = 0; i < ENEMY_MAX_QUANTITY; i++)
 		_enemies[i] = NULL;
 	for (int i = 0; i < ENEMY2_MAX_QUANTITY; i++)
 		_enemies2[i] = NULL;
 	for (int i = 0; i < METEOR_MAX_QUANTITY; i++)
 		_meteors[i] = NULL;
+	for (int i = 0; i < METEOR2_MAX_QUANTITY; i++)
+		_meteors2[i] = NULL;
 	for (int i = 0; i < STAR_MAX_QUANTITY; i++)
 		_stars[i] = NULL;
 	_texture = 0;
@@ -42,6 +45,12 @@ void	Background::clean(void) {
 		if (_meteors[i]) {
 			delete _meteors[i];
 			_meteors[i] = NULL;
+		}
+	}
+	for (int i = 0; i < METEOR2_MAX_QUANTITY; i++) {
+		if (_meteors2[i]) {
+			delete _meteors2[i];
+			_meteors2[i] = NULL;
 		}
 	}
 	for (int i = 0; i < STAR_MAX_QUANTITY; i++) {
@@ -143,6 +152,15 @@ void	Background::makeMeteor(t_settings& settings) {
 		break;
 	}
 }
+void	Background::makeMeteor2(t_settings& settings) {
+	for (int i = 0; i < METEOR2_MAX_QUANTITY; i++) {
+		if (_meteors2[i]) continue;
+		int pos_x = rand() % (WINDOW_WIDTH - METEOR2_WIDTH);
+		_meteors2[i] = new Meteor2(pos_x);
+		_meteors2[i]->load(METEOR2_IMG, settings);
+		break;
+	}
+}
 void	Background::makeEnemy(t_settings& settings) {
 	int quantity = 2;
 	int randNum;
@@ -176,6 +194,40 @@ void	Background::makeEnemy2(t_settings& settings) {
 	}
 }
 
+void Background::render(t_settings& settings)
+{
+	if (bgTexture) {
+		SDL_RenderCopy(settings.renderer, bgTexture, nullptr, nullptr);
+	}
+}
+
+bool Background::loadBackground(const char* path, t_settings& settings)
+{
+	if (bgTexture != nullptr) {
+		SDL_DestroyTexture(bgTexture);
+		bgTexture = nullptr;
+	}
+
+	// Load image from specified path
+	SDL_Surface* loadedSurface = IMG_Load(path);
+	if (loadedSurface == nullptr) {
+		std::cout << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << std::endl;
+		return false;
+	}
+
+	// Convert surface to texture
+	bgTexture = SDL_CreateTextureFromSurface(settings.renderer, loadedSurface);
+	if (bgTexture == nullptr) {
+		std::cout << "Unable to create texture from " << path << "! SDL Error: " << SDL_GetError() << std::endl;
+	}
+
+	// Free the loaded surface
+	SDL_FreeSurface(loadedSurface);
+
+	return bgTexture != nullptr;
+}
+
+
 void	Background::displayStar(t_settings& settings) {
 	for (int i = 0; i < STAR_MAX_QUANTITY; i++) {
 		if (_stars[i]) {
@@ -200,6 +252,20 @@ void	Background::displayMeteor(t_settings& settings, bool itsTime) {
 			}
 			if (itsTime) _meteors[i]->moveDown();
 			_meteors[i]->render(settings);
+		}
+	}
+}
+
+void	Background::displayMeteor2(t_settings& settings, bool itsTime) {
+	for (int i = 0; i < METEOR2_MAX_QUANTITY; i++) {
+		if (_meteors2[i]) {
+			if (itsTime && _meteors2[i]->getY() >= WINDOW_HEIGHT) {
+				delete _meteors2[i];
+				_meteors2[i] = NULL;
+				continue;
+			}
+			if (itsTime) _meteors2[i]->moveDown();
+			_meteors2[i]->render(settings);
 		}
 	}
 }
@@ -274,6 +340,20 @@ bool	Background::hitMeteor(Player& player) {
 	return false;
 }
 
+bool	Background::hitMeteor2(Player& player) {
+	for (int i = 0; i < METEOR2_MAX_QUANTITY; i++) {
+		if (_meteors2[i]) {
+			if (player.containes(_meteors2[i])) {
+				if (player.getKilled(METEOR2_HIT))
+					return true;
+				delete _meteors2[i];
+				_meteors2[i] = NULL;
+			}
+		}
+	}
+	return false;
+}
+
 void	Background::killEnemy(Player& player) {
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		for (int j = 0; j < ENEMY_MAX_QUANTITY; j++) {
@@ -305,6 +385,18 @@ void	Background::killMeteor(Player& player) {
 				delete _meteors[j];
 				_meteors[j] = NULL;
 				player.setPoints(METEOR_POINTS);
+			}
+		}
+	}
+}
+
+void	Background::killMeteor2(Player& player) {
+	for (int i = 0; i < MAX_BULLETS; i++) {
+		for (int j = 0; j < METEOR2_MAX_QUANTITY; j++) {
+			if (_meteors2[j] && player.kill(i, _meteors2[j])) {
+				delete _meteors2[j];
+				_meteors2[j] = NULL;
+				player.setPoints(METEOR2_POINTS);
 			}
 		}
 	}

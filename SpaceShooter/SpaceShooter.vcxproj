@@ -26,6 +26,7 @@
     <ClInclude Include="Fireball.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Meteor.h" />
+    <ClInclude Include="Meteor2.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SpaceShooter.h" />
     <ClInclude Include="Star.h" />
@@ -38,6 +39,7 @@
     <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Meteor.cpp" />
+    <ClCompile Include="Meteor2.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Star.cpp" />
   </ItemGroup>
